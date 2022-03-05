@@ -18,7 +18,7 @@ export const Header = (props: any) =>{
                              className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
                         Главная
                     </NavLink>
-                    <NavLink to='/'
+                    <NavLink to='/gallery'
                              className={(navData) => navData.isActive ? styles.header_link_active : styles.header_link}>
                         Галерея
                     </NavLink>
