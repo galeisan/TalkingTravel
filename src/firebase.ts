@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
+    signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage"
 import {useEffect, useState} from "react";
+
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -16,9 +18,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const storage = getStorage()
+const provider = new GoogleAuthProvider()
 
-export function signup(email:any, password:any){
-    return createUserWithEmailAndPassword(auth, email, password);
+export const signInWithGoogle = () =>{
+    signInWithPopup(auth, provider).then((result)=>{
+        console.log(result)
+    }).catch((error)=>{
+        console.log(error)
+    })
+}
+
+export function signup(email:any,  password:any){
+    return createUserWithEmailAndPassword(auth, email, password)
 }
 
 export function login(email:any, password:any){
@@ -51,3 +62,4 @@ export async function upload(file:any, currentUser:any, setLoading:any){
     setLoading(false)
     alert("Uploaded file")
 }
+

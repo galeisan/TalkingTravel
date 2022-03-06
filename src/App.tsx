@@ -6,6 +6,7 @@ import {AddCardPage} from "./pages/AddCardPage";
 import {GalleryPage} from "./pages/GalleryPage";
 import {LoginPage} from "./pages/LogInPage";
 import {SignUpPage} from "./pages/SignUpPage";
+import {ProfilePage} from "./pages/ProfilePage";
 
 
 
@@ -18,6 +19,7 @@ const App = hot(module)(() => {
                 <Route path="/gallery" element={<GalleryPage />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/signup" element={<SignUpPage />}/>
+                <Route path="/profile" element={<ProfilePage />}/>
             </Routes>
     );
 })

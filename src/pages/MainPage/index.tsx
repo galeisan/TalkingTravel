@@ -21,7 +21,7 @@ export const MainPage = observer(() => {
                     <h4>TEXT</h4>
                     <p>What a beautiful sunrise</p>
             </div>
-            <Button onClick={() => goTo('/')}>Тескт кнопки</Button>
+            <Button disabled={false} onClick={() => goTo('/')}>Тескт кнопки</Button>
         </BaseLayout>
     )
 });
