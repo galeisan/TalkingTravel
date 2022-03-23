@@ -5,6 +5,7 @@ import {BaseLayout} from "../../components/BaseLayout";
 import {logout, useAuth} from "../../firebase";
 import Profile from "../../components/profile";
 import {Button} from "../../components/ui/Button";
+import styles from "./index.module.sass";
 
 
 export const ProfilePage = observer(() => {
@@ -24,14 +25,23 @@ export const ProfilePage = observer(() => {
         setLoading(false)
     }
 
+    const handleChangeProfile = () => {
+    }
+
     return (
         <BaseLayout>
-            <div>Currently logged in as: {currentUser?.email}</div>
-            <div>Currently logged in as: {currentUser?.displayName}</div>
+            <div className={styles.user_info_wrapper}>
+                <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
+                <div className={styles.user_info}>
+                    Имя Человека :(
+                    {currentUser?.email}
+                    <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
+                </div>
+            </div>
             {currentUser &&
             <>
                 <Profile/>
-                <Button disabled={loading|| !currentUser} onClick={handleLogout}>Log out</Button>
+                <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
             </>}
         </BaseLayout>
     )

@@ -5,9 +5,17 @@ import header_search_icon from '../../assets/header_search_icon.svg'
 import header_profile_icon from '../../assets/header_profile_icon.svg'
 import vertical_divider from '../../assets/vertical_divider.svg'
 import {NavLink} from "react-router-dom";
+import {Button} from "../ui/Button";
+import {useNavigate} from "react-router";
 
 export const Header = (props: any) =>{
     const { children } = props;
+    let navigate = useNavigate()
+
+    const goToLogin = (): void => {
+        navigate('/login')
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.header_wrapper}>
@@ -29,7 +37,9 @@ export const Header = (props: any) =>{
                 </div>
                     <img className={styles.vertical_divider} src={vertical_divider}/>
                     <img className={styles.header_icon} src={header_search_icon}/>
-                    <img className={styles.header_icon} src={header_profile_icon}/>
+                    <Button id={styles.header_login_btn} onClick={goToLogin} disabled={false}>
+                        <img className={styles.header_icon} src={header_profile_icon}/>
+                    </Button>
                 </div>
             </div>
         </div>
