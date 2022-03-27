@@ -26,23 +26,31 @@ export const ProfilePage = observer(() => {
     }
 
     const handleChangeProfile = () => {
+        console.log(currentUser)
     }
 
     return (
         <BaseLayout>
-            <div className={styles.user_info_wrapper}>
-                <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
-                <div className={styles.user_info}>
-                    Имя Человека :(
-                    {currentUser?.email}
-                    <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
+            <div className={styles.content_container}>
+                <div className={styles.content_wrapper}>
+                    <div className={styles.user_info_wrapper}>
+                        <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
+                        <div className={styles.user_info}>
+                            Имя Человека
+                            {currentUser?.email}
+                            <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
+                        </div>
+                    </div>
+                    <div className={styles.menu_container}>
+                        Мои места Подборки Лайки Прочее
+                    </div>
+                    {currentUser &&
+                    <>
+                        <Profile/>
+                        <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
+                    </>}
                 </div>
             </div>
-            {currentUser &&
-            <>
-                <Profile/>
-                <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
-            </>}
         </BaseLayout>
     )
 });

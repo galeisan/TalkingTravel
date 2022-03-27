@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 export const Input = React.forwardRef<HTMLInputElement, IInput>(
     (props, ref) => {
-        const { placeholder, type} = props;
+        const { placeholder, type, id} = props;
         return (
             <input
                 ref={ref}
@@ -17,6 +17,7 @@ export const Input = React.forwardRef<HTMLInputElement, IInput>(
                 className={cx({
                     input: true,
                 })}
+                id={id}
             />
         );
     }
