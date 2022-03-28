@@ -6,13 +6,13 @@ import {useEffect, useState} from "react";
 
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_API_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID
+  apiKey: "AIzaSyCkciqlJj5EA-nyMmxENHYyHzOwwi2aC9M",
+  authDomain: "talking-travel-auth-a9134.firebaseapp.com",
+  databaseURL: "https://talking-travel-auth-a9134-default-rtdb.firebaseio.com",
+  projectId: "talking-travel-auth-a9134",
+  storageBucket: "talking-travel-auth-a9134.appspot.com",
+  messagingSenderId: "71959847892",
+  appId: "1:71959847892:web:8d7a75445d3630a8026c41"
 }
 
 const app = initializeApp(firebaseConfig)
