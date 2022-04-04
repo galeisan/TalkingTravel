@@ -19,38 +19,29 @@ export const Form = () => {
     function handleFileSelect(event:any) {
         selectedFile = event.target.files[0];
     };
-
-    function confirmUpload() {
-        var metadata = {
-            contentType: 'image',
-            customMetadata: {
-                'dogType': 'Lab',
-                'uploadedBy': currentUser.uid,
-                'title': $("#title").val(),
-                'country': $("#country").val(),
-                'address': $("#address").val(),
-                'description': $("#description").val(),
-            },
-        };
-        var uploadTask = firebase.storage().ref().child('dogImages/' + selectedFile.name).put(selectedFile, metadata);
-        // Register three observers:
-        // 1. 'state_changed' observer, called any time the state changes
-        // 2. Error observer, called on failure
-        // 3. Completion observer, called on successful completion
-        uploadTask.on('state_changed', function(snapshot){
-            // Observe state change events such as progress, pause, and resume
-            // See below for more detail
-        }, function(error) {
-            // Handle unsuccessful uploads
-        }, function() {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            $(".upload-group")[0].before("Success!");
-            $(".upload-group").hide();
-
-        });
-
-    }
+    //
+    // function confirmUpload() {
+    //     var metadata = {
+    //         contentType: 'image',
+    //         customMetadata: {
+    //             'dogType': 'Lab',
+    //             'uploadedBy': currentUser.uid,
+    //             'title': $("#title").val(),
+    //             'country': $("#country").val(),
+    //             'address': $("#address").val(),
+    //             'description': $("#description").val(),
+    //         },
+    //     };
+    //     var uploadTask = firebase.storage().ref().child('dogImages/' + selectedFile.name).put(selectedFile, metadata);
+    //     uploadTask.on('state_changed', function(snapshot){
+    //     }, function(error) {
+    //     }, function() {
+    //         $(".upload-group")[0].before("Success!");
+    //         $(".upload-group").hide();
+    //
+    //     });
+    //
+    // }
 
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.card_form}>
@@ -67,7 +58,7 @@ export const Form = () => {
                 {...register('description', {required: true})}/>
                 {errors.description && (<span className={styles.err_span}>Required</span>)}
                 <input type="file" id="upload" required onChange={handleFileSelect}/>
-                <input id={styles.card_form_submit} type="submit" value="Добавить" onClick={confirmUpload}/>
+                <input id={styles.card_form_submit} type="submit" value="Добавить" onClick={() => {}}/>
                 <h5>(массив)категории + фото</h5>
             </form>
     )
