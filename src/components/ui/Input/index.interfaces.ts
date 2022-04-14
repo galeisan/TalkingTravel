@@ -4,6 +4,7 @@ export interface IInput {
     ref?: MutableRefObject<HTMLInputElement>;
     placeholder?: string;
     type?: string;
-    value?:string
-    id?:string
+    value?:string;
+    id?:string;
+    onChange?: any;
 }

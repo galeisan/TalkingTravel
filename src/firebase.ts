@@ -3,22 +3,29 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
     signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage"
 import {useEffect, useState} from "react";
+import {addDoc, collection, doc, getFirestore} from 'firebase/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/firestore"
+import "firebase/storage"
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCkciqlJj5EA-nyMmxENHYyHzOwwi2aC9M",
-  authDomain: "talking-travel-auth-a9134.firebaseapp.com",
-  databaseURL: "https://talking-travel-auth-a9134-default-rtdb.firebaseio.com",
-  projectId: "talking-travel-auth-a9134",
-  storageBucket: "talking-travel-auth-a9134.appspot.com",
-  messagingSenderId: "71959847892",
-  appId: "1:71959847892:web:8d7a75445d3630a8026c41"
+    apiKey: "AIzaSyDt5W8flTMF-2mRUIHOQ56esDexqRfFiKc",
+    authDomain: "talking-travel-78a9c.firebaseapp.com",
+    projectId: "talking-travel-78a9c",
+    storageBucket: "talking-travel-78a9c.appspot.com",
+    messagingSenderId: "954833119569",
+    appId: "1:954833119569:web:71c2759db3007b00e68b70"
 }
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-const storage = getStorage()
+export const storage = getStorage()
 const provider = new GoogleAuthProvider()
+export const database = getFirestore();
+const usersDatabaseRef = collection(database, 'profile');
+
+
 
 export const signInWithGoogle = () =>{
     signInWithPopup(auth, provider).then((result)=>{
@@ -28,8 +35,16 @@ export const signInWithGoogle = () =>{
     })
 }
 
-export function signup(email:any,  password:any){
+export function signup(email:any,  password:any, userData?:any){
     return createUserWithEmailAndPassword(auth, email, password)
+        .then((registeredUser) => {
+        addDoc(usersDatabaseRef, {
+            uid: registeredUser.user.uid,
+            name: userData.name,
+            email: userData.email
+        })
+            .then(res => console.log(res));
+    })
 }
 
 export function login(email:any, password:any){

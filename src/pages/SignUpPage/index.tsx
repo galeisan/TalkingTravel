@@ -18,13 +18,20 @@ export const SignUpPage = observer(() => {
 
     const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
     const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const nameRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
 
 
 
     async function handleSignUp(){
         setLoading(true)
         try {
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await signup(emailRef.current.value, passwordRef.current.value, data)
             navigate('/profile')
         } catch(e) {
             console.log((e as Error).message)
@@ -55,9 +62,10 @@ export const SignUpPage = observer(() => {
                         <h6>-ИЛИ-</h6>
                     </div>
                     <div className={styles.signup_form}>
-                        <Input id={styles.email_input} ref={emailRef} placeholder="Email" />
-                        <Input id={styles.password_input} ref={passwordRef} type="password" placeholder="Пароль" />
-                        <Button disabled={loading || currentUser} onClick={handleSignUp}>Зарегистрироваться</Button>
+                        <Input id={styles.name_input} ref={nameRef} onChange={(e: any) => setData({...data, name: e.target.value})} placeholder="Имя пользователя" />
+                        <Input id={styles.email_input} ref={emailRef} onChange={(e: any) => setData({...data, email: e.target.value})} placeholder="Email" />
+                        <Input id={styles.password_input} ref={passwordRef} onChange={(e: any) => setData({...data, password: e.target.value})} type="password" placeholder="Пароль" />
+                        <Button disabled={false} onClick={handleSignUp}>Зарегистрироваться</Button>
                     </div>
                     <div className={styles.signup_footer}>
                         Уже есть аккаунт?
