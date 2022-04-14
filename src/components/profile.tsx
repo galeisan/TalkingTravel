@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import avatar from '../assets/header_profile_icon.svg'
-import {useAuth, upload} from "../firebase";
+import {useAuth, uploadUserPhoto} from "../firebase";
 import {set} from "mobx";
 
 export default function ProfilePage(){
@@ -16,7 +16,7 @@ export default function ProfilePage(){
     }
 
     function handleClick(){
-        upload(photo, currentUser, setLoading)
+        uploadUserPhoto(photo, currentUser, setLoading)
     }
 
     useEffect(()=>{

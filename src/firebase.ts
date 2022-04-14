@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,
     signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage"
+import {getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable} from "firebase/storage"
 import {useEffect, useState} from "react";
 import {addDoc, collection, doc, getFirestore} from 'firebase/firestore';
 import firebase from "firebase/compat/app";
@@ -10,17 +10,17 @@ import "firebase/storage"
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDt5W8flTMF-2mRUIHOQ56esDexqRfFiKc",
-    authDomain: "talking-travel-78a9c.firebaseapp.com",
-    projectId: "talking-travel-78a9c",
-    storageBucket: "talking-travel-78a9c.appspot.com",
-    messagingSenderId: "954833119569",
-    appId: "1:954833119569:web:71c2759db3007b00e68b70"
+    apiKey: "AIzaSyA1DSJD4H2BDC0quOaoWlDnHYDtJ_5REks",
+    authDomain: "talking-travel-722ce.firebaseapp.com",
+    projectId: "talking-travel-722ce",
+    storageBucket: "talking-travel-722ce.appspot.com",
+    messagingSenderId: "270361645595",
+    appId: "1:270361645595:web:ad9d2e785f99f8a5449ebe"
 }
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
-export const storage = getStorage()
+export const storage = getStorage(app)
 const provider = new GoogleAuthProvider()
 export const database = getFirestore();
 const usersDatabaseRef = collection(database, 'profile');
@@ -66,7 +66,7 @@ export function useAuth(){
     return currentUser;
 }
 
-export async function upload(file:any, currentUser:any, setLoading:any){
+export async function uploadUserPhoto(file:any, currentUser:any, setLoading:any){
     const fileRef = ref(storage, currentUser.uid + '.png')
     setLoading(true)
     const snapshot = await uploadBytes(fileRef, file)
@@ -77,4 +77,3 @@ export async function upload(file:any, currentUser:any, setLoading:any){
     setLoading(false)
     alert("Uploaded file")
 }
-
