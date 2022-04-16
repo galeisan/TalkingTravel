@@ -1,6 +1,8 @@
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router";
 import {BaseLayout} from "../../components/BaseLayout";
+import {Feed} from "../../components/Feed";
+import React from "react";
 
 
 
@@ -13,6 +15,9 @@ export const GalleryPage = observer(() => {
 
     return (
         <BaseLayout>
+            <div>
+                <Feed/>
+            </div>
         </BaseLayout>
     )
 });

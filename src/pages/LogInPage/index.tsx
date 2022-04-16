@@ -57,7 +57,7 @@ export const LoginPage = observer(() => {
                     <div className={styles.login_form}>
                         <Input id={styles.email_input} ref={emailRef} placeholder="Email" />
                         <Input id={styles.password_input} ref={passwordRef} type="password" placeholder="Пароль" />
-                        <Button disabled={loading || currentUser} onClick={handleLogin}>Войти</Button>
+                        <Button disabled={false} onClick={handleLogin}>Войти</Button>
                     </div>
                     <div className={styles.login_footer}>
                         Еще нет аккаунта?
