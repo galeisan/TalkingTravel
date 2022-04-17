@@ -20,7 +20,6 @@ export const Feed = () => {
         setLoading(true)
         getAllFeeds(database).then((data) => {
             setFeeds(data)
-            console.log(data)
             setLoading(false)
         })
     }, [])
