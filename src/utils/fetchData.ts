@@ -1,6 +1,6 @@
 import {app, database} from '../firebase'
 
-import {collection, doc, getDocs, getDoc, orderBy, query} from "firebase/firestore";
+import {collection, doc, getDocs, getDoc, orderBy, query, where} from "firebase/firestore";
 
 export const getAllFeeds = async (database:any) => {
     const feeds = await getDocs(
@@ -17,6 +17,13 @@ export const getUserInfo = async(database:any, userId:any) => {
     } else {
         return 'No such doc'
     }
+}
+
+export const userUploadedPins = async (database:any, userId:any) => {
+    const feeds = await getDocs(
+        query(collection(database, "posts"), where('userId', '==', userId), orderBy("id", "desc"))
+    )
+    return feeds.docs.map(doc => doc.data())
 }
 
 export const getSpecificPin = async(database:any, pinId:any) =>{

@@ -26,6 +26,7 @@ export const LoginPage = observer(() => {
         setLoading(true)
         try {
             await login(emailRef.current.value, passwordRef.current.value);
+            // navigate(`/userDetail/${currentUser.uid}`)
             navigate('/profile')
         } catch {
             alert("Error!")

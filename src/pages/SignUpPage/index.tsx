@@ -32,6 +32,7 @@ export const SignUpPage = observer(() => {
         setLoading(true)
         try {
             await signup(emailRef.current.value, passwordRef.current.value, data)
+            // navigate(`/userDetail/${currentUser.uid}`)
             navigate('/profile')
         } catch(e) {
             console.log((e as Error).message)

@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
     signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import {getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable} from "firebase/storage"
 import {useEffect, useState} from "react";
-import {addDoc, collection, doc, getFirestore} from 'firebase/firestore';
+import {addDoc, collection, doc, getFirestore, setDoc} from 'firebase/firestore';
 import firebase from "firebase/compat/app";
 import "firebase/firestore"
 import "firebase/storage"
@@ -38,7 +38,7 @@ export const signInWithGoogle = () =>{
 export function signup(email:any,  password:any, userData?:any){
     return createUserWithEmailAndPassword(auth, email, password)
         .then((registeredUser) => {
-        addDoc(usersDatabaseRef, {
+        setDoc(doc(database, 'profile', registeredUser.user.uid), {
             uid: registeredUser.user.uid,
             name: userData.name,
             email: userData.email

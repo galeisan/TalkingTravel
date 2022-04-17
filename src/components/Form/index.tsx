@@ -4,8 +4,8 @@ import styles from "./index.module.sass";
 import {Input} from "../ui/Input";
 import {database, storage, uploadUserPhoto, useAuth} from "../../firebase";
 import {getDownloadURL, ref, uploadBytes,  deleteObject, uploadBytesResumable} from 'firebase/storage'
-import firebase from "firebase/compat/app";
 import { collection, onSnapshot,  doc, setDoc } from "firebase/firestore";
+import {categories} from "../../categoriesData";
 
 export const Form = () => {
     let selectedFile:any;
@@ -20,6 +20,7 @@ export const Form = () => {
     const[description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
     const [imageAsset, setImageAsset]=useState('')
+    const [category, setCategory]=useState('Выберите категорию')
 
     const postsDatabaseRef = collection(database, 'posts');
 
@@ -84,18 +85,20 @@ export const Form = () => {
 
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.card_form}>
-                <Input placeholder={'Название'} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
-                {errors.title && (<span className={styles.err_span}>Required</span>)}
-                <Input placeholder={'Страна'} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
-                {errors.country && (<span className={styles.err_span}>Required</span>)}
-                <Input placeholder={'Aдрес'} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
-                {errors.address && (<span className={styles.err_span}>Required</span>)}
-                <textarea id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
-                {errors.description && (<span className={styles.err_span}>Required</span>)}
+                <Input placeholder={'Название'} required={true} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
+                <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
+                <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
+                {/*<select id="category">*/}
+                {/*    {categories && categories.map(data =>{*/}
+                {/*        <option key={data.id} onClick={() => setCategory(data.name)}>*/}
+                {/*            {data.name}*/}
+                {/*        </option>*/}
+                {/*    })}*/}
+                {/*</select>*/}
+                <textarea required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
                 <input type="file" id="upload" required onChange={uploadImage}/>
-                <button onClick={deleteImage}/>
+                {/*<button onClick={deleteImage}/>*/}
                 <input id={styles.card_form_submit} type="submit" value="Добавить" onClick={uploadDetails}/>
-                <h5>(массив)категории + фото</h5>
             </form>
     )
 }

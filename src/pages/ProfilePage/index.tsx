@@ -21,6 +21,12 @@ export const ProfilePage = observer(() => {
 
     let navigate = useNavigate()
 
+    if(loading) return <div>Загрузка...</div>
+
+    useEffect(()=>{
+
+    },[])
+
 
     useEffect(() => {
         const getUsersInfo = async () => {
@@ -60,8 +66,9 @@ export const ProfilePage = observer(() => {
                                 <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
                                 <div className={styles.user_info}>
                                     <h5>{usersInfo.name}</h5>
-                                    <Button onClick={handleChangeProfile} disabled={false}
-                                            mode={"secondary"}>Редактировать</Button>
+                                    <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>
+                                        Редактировать
+                                    </Button>
                                 </div>
                             </div>
                             <div className={styles.menu_container}>

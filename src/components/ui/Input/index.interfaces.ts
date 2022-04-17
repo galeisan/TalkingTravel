@@ -7,4 +7,5 @@ export interface IInput {
     value?:string;
     id?:string;
     onChange?: any;
+    required?: boolean
 }
