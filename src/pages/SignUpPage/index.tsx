@@ -8,10 +8,12 @@ import {Input} from "../../components/ui/Input";
 import styles from "./index.module.sass";
 import sign_up_with_google_icon from "../../assets/sign_up_with_google_icon.svg";
 import signup_img from "../../assets/signup_img.png";
+import {usePasswordToggle} from "../../utils/usePasswordToggle";
 
 
 export const SignUpPage = observer(() => {
     const [loading, setLoading] = useState(false)
+    const [passwordInputType, toggleIcon] = usePasswordToggle()
     const currentUser = useAuth()
 
     let navigate = useNavigate()
@@ -65,7 +67,10 @@ export const SignUpPage = observer(() => {
                     <div className={styles.signup_form}>
                         <Input id={styles.name_input} ref={nameRef} onChange={(e: any) => setData({...data, name: e.target.value})} placeholder="Имя пользователя" />
                         <Input id={styles.email_input} ref={emailRef} onChange={(e: any) => setData({...data, email: e.target.value})} placeholder="Email" />
-                        <Input id={styles.password_input} ref={passwordRef} onChange={(e: any) => setData({...data, password: e.target.value})} type="password" placeholder="Пароль" />
+                        <Input id={styles.password_input} ref={passwordRef}
+                               onChange={(e: any) => setData({...data, password: e.target.value})}
+                               type={passwordInputType} placeholder="Пароль" />
+                        <span className={styles.password_toggle_icon}>{toggleIcon}</span>
                         <Button disabled={false} onClick={handleSignUp}>Зарегистрироваться</Button>
                     </div>
                     <div className={styles.signup_footer}>

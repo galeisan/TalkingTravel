@@ -9,17 +9,21 @@ import {Input} from "../../components/ui/Input";
 import styles from "./index.module.sass";
 import signup_img from "../../assets/signup_img.png";
 import sign_up_with_google_icon from "../../assets/sign_up_with_google_icon.svg";
+import {usePasswordToggle} from "../../utils/usePasswordToggle";
 
 
 
 export const LoginPage = observer(() => {
+
     const [loading, setLoading] = useState(false)
+    const [passwordInputType, toggleIcon] = usePasswordToggle()
     const currentUser = useAuth()
 
     let navigate = useNavigate()
 
     const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>;
     const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
 
 
     async function handleLogin(){
@@ -57,7 +61,9 @@ export const LoginPage = observer(() => {
                     </div>
                     <div className={styles.login_form}>
                         <Input id={styles.email_input} ref={emailRef} placeholder="Email" />
-                        <Input id={styles.password_input} ref={passwordRef} type="password" placeholder="Пароль" />
+                        <Input id={styles.password_input} ref={passwordRef}
+                               type={passwordInputType} placeholder="Пароль" />
+                        <span className={styles.password_toggle_icon}>{toggleIcon}</span>
                         <Button disabled={false} onClick={handleLogin}>Войти</Button>
                     </div>
                     <div className={styles.login_footer}>

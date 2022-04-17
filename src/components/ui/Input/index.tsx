@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 export const Input = React.forwardRef<HTMLInputElement, IInput>(
     (props, ref) => {
-        const { placeholder, type, id, value, onChange, required, ...inputProps} = props;
+        const { placeholder, type, id, value, onChange, required, children, ...inputProps} = props;
         return (
             <input
                 ref={ref}
@@ -22,7 +22,9 @@ export const Input = React.forwardRef<HTMLInputElement, IInput>(
                 })}
                 id={id}
                 {...inputProps}
-            />
+            >
+                {children}
+            </input>
         );
     }
 );
