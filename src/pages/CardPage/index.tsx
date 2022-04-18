@@ -7,12 +7,14 @@ import {database, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getSpecificPin, getUserInfo} from "../../utils/fetchData";
 import avatar from "../../assets/header_profile_icon.svg";
+import {LikeArticle} from "../../components/LikeArticle";
 
 
 
 export const CardPage = observer(() => {
     let navigate = useNavigate()
 
+    const currentUser = useAuth()
     const {pinId} = useParams()
 
     const [loading, setLoading] = useState(false)
@@ -53,6 +55,9 @@ export const CardPage = observer(() => {
                             {/*</div>}*/}
                             <div className={styles.info}>
                                 {imageInfo?.description}
+                            </div>
+                            <div className={styles.like_btn}>
+                                {currentUser && <LikeArticle id={imageInfo.id} likes={imageInfo.likes}/>}
                             </div>
                         </div>
                     </div>

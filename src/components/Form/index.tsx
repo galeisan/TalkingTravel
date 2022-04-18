@@ -65,7 +65,9 @@ export const Form = () => {
                   address: address,
                   userId: currentUser.uid,
                   imageURL: imageAsset,
-                  description: description
+                  description: description,
+                  likes: [],
+                  comments: []
               }
               await setDoc(doc(database, 'posts', `${Date.now()}`), data)
           }
