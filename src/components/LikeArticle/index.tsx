@@ -13,7 +13,7 @@ export function LikeArticle({id, likes}:any) {
     return (
         <div>
             <img className={styles.like_icon}
-                 src={`${!likes?.includes(currentUser?.uid) ? heartWhite : heartBlack}`}/>
+                 src={`${!likes?.includes(currentUser.uid) ? heartWhite : heartBlack}`}/>
         </div>
     )
 }

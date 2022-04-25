@@ -26,10 +26,11 @@ export const CardPage = observer(() => {
             setLoading(true)
             getSpecificPin(database, pinId).then((data) =>{
                 setImageInfo(data)
+                console.log(data)
                 // getUserInfo(database, data.userId).then((user)=>{
                 //     setUserInfo(user)
                 //  })
-                console.log(data)
+                // console.log(data)
                 setLoading(false)
             })
         }
@@ -49,10 +50,10 @@ export const CardPage = observer(() => {
                         <h3>{imageInfo?.title}</h3>
                         <div className={styles.infoWrapper}>
                             <img className={styles.pinImage} src={imageInfo?.imageURL}/>
-                            {/*{userInfo && <div className={styles.info}>*/}
-                            {/*    <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>*/}
-                            {/*    <div>{userInfo?.name}</div>*/}
-                            {/*</div>}*/}
+                            {userInfo && <div className={styles.info}>
+                                <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>
+                                <div>{userInfo?.name}</div>
+                            </div>}
                             <div className={styles.info}>
                                 {imageInfo?.description}
                             </div>
