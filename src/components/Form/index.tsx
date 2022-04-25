@@ -90,13 +90,13 @@ export const Form = () => {
                 <Input placeholder={'Название'} required={true} id="title" onChange={(e: any) => setTitle(e.target.value)}/>
                 <Input placeholder={'Страна'} required={true} id="country"  onChange={(e: any) => setCountry(e.target.value)}/>
                 <Input placeholder={'Aдрес'} required={true} id="address"  onChange={(e: any) => setAddress(e.target.value)}/>
-                {/*<select id="category">*/}
-                {/*    {categories && categories.map(data =>{*/}
-                {/*        <option key={data.id} onClick={() => setCategory(data.name)}>*/}
-                {/*            {data.name}*/}
-                {/*        </option>*/}
-                {/*    })}*/}
-                {/*</select>*/}
+                <select id="category">
+                    {categories && categories.map(data =>{
+                        <option key={data.id} onClick={() => setCategory(data.name)}>
+                            {data.name}
+                        </option>
+                    })}
+                </select>
                 <textarea required={true} id="description" placeholder={'Расскажи о своем опыте'}  onChange={(e: any) => setDescription(e.target.value)}/>
                 <input type="file" id="upload" required onChange={uploadImage}/>
                 {/*<button onClick={deleteImage}/>*/}
