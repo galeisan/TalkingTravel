@@ -7,12 +7,14 @@ import {database, useAuth} from "../../firebase";
 import styles from "./index.module.sass";
 import {getSpecificPin, getUserInfo} from "../../utils/fetchData";
 import avatar from "../../assets/header_profile_icon.svg";
+import {LikeArticle} from "../../components/LikeArticle";
 
 
 
 export const CardPage = observer(() => {
     let navigate = useNavigate()
 
+    const currentUser = useAuth()
     const {pinId} = useParams()
 
     const [loading, setLoading] = useState(false)
@@ -24,10 +26,11 @@ export const CardPage = observer(() => {
             setLoading(true)
             getSpecificPin(database, pinId).then((data) =>{
                 setImageInfo(data)
+                console.log(data)
                 // getUserInfo(database, data.userId).then((user)=>{
                 //     setUserInfo(user)
                 //  })
-                console.log(data)
+                // console.log(data)
                 setLoading(false)
             })
         }
@@ -47,12 +50,15 @@ export const CardPage = observer(() => {
                         <h3>{imageInfo?.title}</h3>
                         <div className={styles.infoWrapper}>
                             <img className={styles.pinImage} src={imageInfo?.imageURL}/>
-                            {/*{userInfo && <div className={styles.info}>*/}
-                            {/*    <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>*/}
-                            {/*    <div>{userInfo?.name}</div>*/}
-                            {/*</div>}*/}
+                            {userInfo && <div className={styles.info}>
+                                <img className={styles.userImage} src={userInfo?.photoURL ? userInfo?.photoURL : avatar}/>
+                                <div>{userInfo?.name}</div>
+                            </div>}
                             <div className={styles.info}>
                                 {imageInfo?.description}
+                            </div>
+                            <div className={styles.like_btn}>
+                                {currentUser && <LikeArticle id={imageInfo.id} likes={imageInfo.likes}/>}
                             </div>
                         </div>
                     </div>
