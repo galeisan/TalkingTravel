@@ -5,6 +5,9 @@ import {BaseLayout} from "../../components/BaseLayout";
 import {logout, useAuth} from "../../firebase";
 import Profile from "../../components/profile";
 import {Button} from "../../components/ui/Button";
+import {Menu} from "../../components/Menu";
+import styles from "./index.module.sass";
+import signup_img from "../../assets/signup_img.png";
 
 
 export const ProfilePage = observer(() => {
@@ -24,15 +27,34 @@ export const ProfilePage = observer(() => {
         setLoading(false)
     }
 
+    const handleChangeProfile = () => {
+        console.log(currentUser)
+    }
+
     return (
         <BaseLayout>
-            <div>Currently logged in as: {currentUser?.email}</div>
-            <div>Currently logged in as: {currentUser?.displayName}</div>
-            {currentUser &&
-            <>
-                <Profile/>
-                <Button disabled={loading|| !currentUser} onClick={handleLogout}>Log out</Button>
-            </>}
+            <div className={styles.content_container}>
+                <div className={styles.content_wrapper}>
+                    <div className={styles.user_info_wrapper}>
+                        <img className={styles.user_avatar} src={currentUser?.photoURL} alt="IMAGE"/>
+                        <div className={styles.user_info}>
+                            <h1 className={styles.user_name}>
+                                {currentUser?.name}
+                            </h1>
+                            <p className={styles.user_email}>
+                                {currentUser?.email}
+                            </p>
+                            <Button onClick={handleChangeProfile} disabled={false} mode={"secondary"}>Редактировать</Button>
+                        </div>
+                    </div>
+                    <Menu/>
+                    {currentUser &&
+                    <>
+                        <Profile/>
+                        <Button disabled={loading|| !currentUser} onClick={handleLogout}>Выйти</Button>
+                    </>}
+                </div>
+            </div>
         </BaseLayout>
     )
 });

@@ -1,0 +1,39 @@
+.pinWrapper
+  display: flex
+  flex-direction: column
+  cursor: pointer
+  justify-content: center
+  align-items: center
+  overflow: hidden
+  position: relative
+  background-color: #8A53FF
+  border-radius: 8px
+  &:hover
+    box-shadow: 2px 2px 2px 1px lightgray
+  .pinImage
+    width: 110%
+    height: 110%
+    object-fit: cover
+  .content
+    display: flex
+    flex-direction: row
+    position: absolute
+    bottom: 0
+    left: 0
+    padding: 0
+    width: 100%
+  .userInfo
+    display: flex
+    width: 100%
+    justify-content: space-between
+    align-items: center
+    color: white
+    .userImage
+      width: 40px
+      height: 40px
+      border-radius: 100px
+      background-color: white
+      border: 1px solid lightgray
+
+
+
